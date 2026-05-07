@@ -1,0 +1,1636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aniket Tudu - Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0f0f1e;
+            --secondary: #1a1a2e;
+            --accent: #16213e;
+            --neon: #00d4ff;
+            --neon-pink: #ff006e;
+            --neon-green: #00ff88;
+            --text: #e0e0e0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 15, 30, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 2px solid var(--neon);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, var(--neon), var(--neon-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        nav a {
+            color: var(--text);
+            text-decoration: none;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--neon);
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding: 2rem;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, var(--neon) 0%, transparent 70%);
+            opacity: 0.1;
+            animation: float 15s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(30px); }
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 10;
+            animation: slideInUp 1s ease-out;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--neon), var(--neon-pink), var(--neon-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 900;
+            text-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
+        }
+
+        .tagline {
+            font-size: 1.5rem;
+            color: var(--neon);
+            margin-bottom: 2rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: 2px solid var(--neon);
+            background: transparent;
+            color: var(--neon);
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            background: var(--neon);
+            color: var(--primary);
+            box-shadow: 0 0 20px var(--neon);
+            transform: translateY(-3px);
+        }
+
+        .btn.primary {
+            background: var(--neon);
+            color: var(--primary);
+        }
+
+        .btn.primary:hover {
+            background: var(--neon-pink);
+            border-color: var(--neon-pink);
+            box-shadow: 0 0 20px var(--neon-pink);
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--neon), var(--neon-pink));
+        }
+
+        /* Vibe Card */
+        .vibe-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .vibe-card {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--secondary) 100%);
+            padding: 2rem;
+            border-radius: 10px;
+            border: 1px solid var(--neon);
+            transition: all 0.3s;
+        }
+
+        .vibe-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 30px var(--neon);
+        }
+
+        .vibe-card h3 {
+            color: var(--neon);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .vibe-card p {
+            color: var(--text);
+            line-height: 1.8;
+        }
+
+        /* Traits */
+        .traits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .trait-badge {
+            background: linear-gradient(135deg, var(--accent), var(--secondary));
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 2px solid var(--neon);
+            text-align: center;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .trait-badge:hover {
+            background: linear-gradient(135deg, var(--neon), var(--neon-pink));
+            color: var(--primary);
+            transform: scale(1.1);
+        }
+
+        .trait-badge i {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .trait-badge p {
+            font-weight: 600;
+        }
+
+        /* My World Section */
+        .world-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .world-item {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--secondary) 100%);
+            padding: 2rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--neon);
+            transition: all 0.3s;
+        }
+
+        .world-item:hover {
+            transform: translateX(10px);
+        }
+
+        .world-item i {
+            font-size: 2.5rem;
+            color: var(--neon);
+            margin-bottom: 1rem;
+        }
+
+        .world-item h4 {
+            color: var(--neon);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Quotes Section */
+        .quotes-container {
+            margin-top: 3rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .quote-card {
+            background: linear-gradient(135deg, var(--accent), var(--secondary));
+            padding: 2rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--neon-pink);
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .quote-card::before {
+            content: '"';
+            font-size: 4rem;
+            color: var(--neon);
+            opacity: 0.2;
+            position: absolute;
+            top: -20px;
+            left: 10px;
+        }
+
+        .quote-card:hover {
+            background: linear-gradient(135deg, var(--neon), var(--neon-pink));
+            color: var(--primary);
+        }
+
+        .quote-text {
+            font-style: italic;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .quote-author {
+            font-weight: 600;
+            text-align: right;
+            color: var(--neon);
+        }
+
+        /* Daily Routine Timeline */
+        .timeline {
+            position: relative;
+            margin-top: 3rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 3px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--neon), transparent);
+        }
+
+        .timeline-item {
+            margin-bottom: 3rem;
+            width: 45%;
+        }
+
+        .timeline-item:nth-child(odd) {
+            margin-left: 0;
+            text-align: right;
+            padding-right: 5%;
+        }
+
+        .timeline-item:nth-child(even) {
+            margin-left: 55%;
+            text-align: left;
+            padding-left: 5%;
+        }
+
+        .timeline-content {
+            background: linear-gradient(135deg, var(--accent), var(--secondary));
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 2px solid var(--neon);
+            position: relative;
+        }
+
+        .timeline-content::after {
+            content: '';
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background: var(--neon);
+            border-radius: 50%;
+            top: 30px;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content::after {
+            right: -37px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::after {
+            left: -37px;
+        }
+
+        .timeline-time {
+            color: var(--neon);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .timeline-description {
+            color: var(--text);
+            margin-top: 0.5rem;
+        }
+
+        /* Gallery */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .gallery-item {
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, var(--neon), var(--neon-pink));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            transition: left 0.3s;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
+        }
+
+        .gallery-item:hover::before {
+            left: 100%;
+        }
+
+        /* Mood Board */
+        .mood-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .mood-item {
+            background: linear-gradient(135deg, var(--accent), var(--secondary));
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid var(--neon);
+            transition: all 0.3s;
+        }
+
+        .mood-item:hover {
+            box-shadow: 0 0 30px var(--neon);
+            transform: translateY(-5px);
+        }
+
+        .mood-color {
+            width: 100%;
+            height: 80px;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+        }
+
+        /* Character Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, var(--accent), var(--secondary));
+            padding: 2rem;
+            border-radius: 10px;
+            border: 1px solid var(--neon);
+        }
+
+        .stat-name {
+            color: var(--neon);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .stat-bar {
+            background: rgba(0, 212, 255, 0.1);
+            height: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+            border: 1px solid var(--neon);
+        }
+
+        .stat-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--neon), var(--neon-pink));
+            border-radius: 5px;
+            transition: width 2s ease-out;
+        }
+
+        /* Dream Board */
+        .dreams-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .dream-card {
+            background: linear-gradient(135deg, var(--accent), var(--secondary));
+            padding: 2rem;
+            border-radius: 10px;
+            border: 2px solid var(--neon-pink);
+            transition: all 0.3s;
+        }
+
+        .dream-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 30px var(--neon-pink);
+        }
+
+        .dream-card i {
+            font-size: 2.5rem;
+            color: var(--neon-pink);
+            margin-bottom: 1rem;
+        }
+
+        /* Alter Ego */
+        .alter-ego-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .ego-card {
+            background: linear-gradient(135deg, var(--accent), var(--secondary));
+            padding: 2rem;
+            border-radius: 10px;
+            border: 2px solid var(--neon);
+            transition: all 0.3s;
+        }
+
+        .ego-card:hover {
+            transform: scaleY(1.05);
+            box-shadow: 0 0 30px var(--neon);
+        }
+
+        .ego-title {
+            color: var(--neon);
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .ego-trait {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+        }
+
+        .ego-trait i {
+            color: var(--neon);
+            margin-right: 1rem;
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            .alter-ego-container {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                margin-left: 0 !important;
+                text-align: left !important;
+                padding-left: 60px !important;
+            }
+
+            .timeline-item:nth-child(even) .timeline-content::after,
+            .timeline-item:nth-child(odd) .timeline-content::after {
+                left: -37px;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        /* Achievements */
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .achievement {
+            background: linear-gradient(135deg, var(--accent), var(--secondary));
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid var(--neon-green);
+            transition: all 0.3s;
+        }
+
+        .achievement:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px var(--neon-green);
+        }
+
+        .achievement i {
+            font-size: 3rem;
+            color: var(--neon-green);
+            margin-bottom: 1rem;
+        }
+
+        .achievement h4 {
+            color: var(--neon-green);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Timeline Journey */
+        .journey-timeline {
+            position: relative;
+            margin-top: 3rem;
+        }
+
+        .journey-item {
+            background: linear-gradient(135deg, var(--accent), var(--secondary));
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--neon);
+            transition: all 0.3s;
+        }
+
+        .journey-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 0 20px var(--neon);
+        }
+
+        .journey-year {
+            color: var(--neon);
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Blog Section */
+        .blog-posts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .blog-post {
+            background: linear-gradient(135deg, var(--accent), var(--secondary));
+            padding: 2rem;
+            border-radius: 10px;
+            border: 1px solid var(--neon);
+            transition: all 0.3s;
+        }
+
+        .blog-post:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 30px var(--neon);
+        }
+
+        .blog-date {
+            color: var(--neon);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .blog-title {
+            color: var(--neon);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .blog-excerpt {
+            color: var(--text);
+            line-height: 1.8;
+        }
+
+        .read-more {
+            color: var(--neon-pink);
+            margin-top: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .read-more:hover {
+            color: var(--neon-green);
+        }
+
+        /* Contact Section */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .contact-form {
+            background: linear-gradient(135deg, var(--accent), var(--secondary));
+            padding: 2rem;
+            border-radius: 10px;
+            border: 1px solid var(--neon);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--neon);
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--neon);
+            border-radius: 5px;
+            color: var(--text);
+            font-family: inherit;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--neon-pink);
+            box-shadow: 0 0 10px var(--neon);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .contact-item {
+            background: linear-gradient(135deg, var(--accent), var(--secondary));
+            padding: 2rem;
+            border-radius: 10px;
+            border: 1px solid var(--neon-pink);
+            transition: all 0.3s;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px var(--neon-pink);
+        }
+
+        .contact-item i {
+            font-size: 2rem;
+            color: var(--neon-pink);
+            margin-bottom: 0.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--neon), var(--neon-pink));
+            border-radius: 50%;
+            color: var(--primary);
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px var(--neon);
+        }
+
+        /* Signature/Logo */
+        .signature {
+            text-align: center;
+            padding: 3rem 2rem;
+            margin-top: 3rem;
+            border-top: 2px solid var(--neon);
+        }
+
+        .monogram {
+            font-size: 5rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, var(--neon), var(--neon-pink), var(--neon-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            font-family: Georgia, serif;
+            text-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
+        }
+
+        .signature-text {
+            color: var(--neon);
+            font-size: 0.9rem;
+            letter-spacing: 3px;
+            margin-bottom: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--accent);
+            padding: 2rem;
+            text-align: center;
+            border-top: 2px solid var(--neon);
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-message {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: var(--neon);
+            font-style: italic;
+        }
+
+        .footer-bottom {
+            color: var(--text);
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            border-top: 1px solid rgba(0, 212, 255, 0.2);
+            padding-top: 1rem;
+        }
+
+        /* Testimonials */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .testimonial {
+            background: linear-gradient(135deg, var(--accent), var(--secondary));
+            padding: 2rem;
+            border-radius: 10px;
+            border: 2px solid var(--neon-pink);
+            position: relative;
+        }
+
+        .testimonial::before {
+            content: '★★★★★';
+            color: var(--neon-green);
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-text {
+            color: var(--text);
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .testimonial-author {
+            color: var(--neon);
+            font-weight: 700;
+        }
+
+        .testimonial-role {
+            color: var(--neon-pink);
+            font-size: 0.9rem;
+        }
+
+        /* Scroll animation */
+        .fade-in {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav ul {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 60px 1rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">AT</div>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#world">My World</a></li>
+            <li><a href="#stats">Stats</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>ANIKET TUDU</h1>
+            <p class="tagline">Gamer | Visionary | Night Owl | Code Crafted Dreams</p>
+            <div class="cta-buttons">
+                <button class="btn primary">Explore My World</button>
+                <button class="btn">Download CV</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vibe Card -->
+    <section id="vibe">
+        <h2 class="section-title">Who I Am</h2>
+        <div class="vibe-container">
+            <div class="vibe-card fade-in">
+                <h3>🎮 The Gamer</h3>
+                <p>I live in the digital world. Free Fire tournaments, Minecraft architecture, and strategic gaming are where I thrive. Every game is a lesson in focus and problem-solving.</p>
+            </div>
+            <div class="vibe-card fade-in delay-1">
+                <h3>📚 The Bookworm</h3>
+                <p>Mystery stories keep my mind sharp. I devour plot twists at 4 AM like a true night owl. Every mystery is a puzzle waiting to be solved.</p>
+            </div>
+            <div class="vibe-card fade-in delay-2">
+                <h3>⚡ The Grinder</h3>
+                <p>The 4 AM grind is where I shine. While the world sleeps, I'm building, coding, learning, and creating. My best ideas come when the clock strikes midnight.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- My World Section -->
+    <section id="world">
+        <h2 class="section-title">My World</h2>
+        <div class="world-items">
+            <div class="world-item fade-in">
+                <i class="fas fa-fire"></i>
+                <h4>Free Fire</h4>
+                <p>Competitive gaming at its finest. Every match teaches tactical awareness, quick decision-making, and team coordination.</p>
+            </div>
+            <div class="world-item fade-in delay-1">
+                <i class="fas fa-cube"></i>
+                <h4>Minecraft</h4>
+                <p>Building digital dreams. Architecture, design, and creativity meet in this sandbox of endless possibilities.</p>
+            </div>
+            <div class="world-item fade-in delay-2">
+                <i class="fas fa-book"></i>
+                <h4>Mystery Stories</h4>
+                <p>Thriller novels and mystery plots fuel my creative mind. Every twist keeps me guessing and analyzing.</p>
+            </div>
+            <div class="world-item fade-in delay-3">
+                <i class="fas fa-moon"></i>
+                <h4>4AM Grind</h4>
+                <p>The peak hours. When focus is maximum and distractions are minimal. This is my power hour.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Traits -->
+    <section>
+        <h2 class="section-title">My Traits</h2>
+        <div class="traits-grid">
+            <div class="trait-badge fade-in">
+                <i class="fas fa-bullseye"></i>
+                <p>Focused</p>
+            </div>
+            <div class="trait-badge fade-in delay-1">
+                <i class="fas fa-gamepad"></i>
+                <p>Gamer</p>
+            </div>
+            <div class="trait-badge fade-in delay-2">
+                <i class="fas fa-book"></i>
+                <p>Bookworm</p>
+            </div>
+            <div class="trait-badge fade-in delay-3">
+                <i class="fas fa-sun"></i>
+                <p>Early Riser</p>
+            </div>
+            <div class="trait-badge fade-in">
+                <i class="fas fa-brain"></i>
+                <p>Strategic</p>
+            </div>
+            <div class="trait-badge fade-in delay-1">
+                <i class="fas fa-rocket"></i>
+                <p>Ambitious</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Playlist Vibe -->
+    <section>
+        <h2 class="section-title">🎵 Music Vibe</h2>
+        <div class="vibe-container">
+            <div class="vibe-card fade-in">
+                <h3>Lo-Fi Hip Hop</h3>
+                <p>The soundtrack to my grind. Smooth beats, chill vibes, perfect for coding sessions and late-night studying.</p>
+            </div>
+            <div class="vibe-card fade-in delay-1">
+                <h3>EDM & Synthwave</h3>
+                <p>When I need energy and motivation. Electronic beats that keep the dopamine flowing during intense gaming sessions.</p>
+            </div>
+            <div class="vibe-card fade-in delay-2">
+                <h3>Indie & Alternative</h3>
+                <p>Deep, soulful, and artistic. For when I'm in my creative zone, thinking, writing, and building.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quotes -->
+    <section>
+        <h2 class="section-title">💬 Favourite Quotes</h2>
+        <div class="quotes-container">
+            <div class="quote-card fade-in">
+                <div class="quote-text">"The only way to do great work is to love what you do."</div>
+                <div class="quote-author">— Steve Jobs</div>
+            </div>
+            <div class="quote-card fade-in delay-1">
+                <div class="quote-text">"Winners don't quit. Quitters don't win."</div>
+                <div class="quote-author">— Anonymous</div>
+            </div>
+            <div class="quote-card fade-in delay-2">
+                <div class="quote-text">"The night is the time when focus is pure and distractions fade."</div>
+                <div class="quote-author">— Aniket's Philosophy</div>
+            </div>
+            <div class="quote-card fade-in delay-3">
+                <div class="quote-text">"Success is not about being the best. It's about being better than yesterday."</div>
+                <div class="quote-author">— Growth Mindset</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Daily Routine Timeline -->
+    <section>
+        <h2 class="section-title">🌙 Daily Routine</h2>
+        <div class="timeline">
+            <div class="timeline-item fade-in">
+                <div class="timeline-content">
+                    <div class="timeline-time">6:00 AM - 7:00 AM</div>
+                    <div class="timeline-description">Wake Up & Meditation</div>
+                </div>
+            </div>
+            <div class="timeline-item fade-in delay-1">
+                <div class="timeline-content">
+                    <div class="timeline-time">7:00 AM - 8:30 AM</div>
+                    <div class="timeline-description">Morning Exercise & Breakfast</div>
+                </div>
+            </div>
+            <div class="timeline-item fade-in delay-2">
+                <div class="timeline-content">
+                    <div class="timeline-time">8:30 AM - 12:30 PM</div>
+                    <div class="timeline-description">Focused Work & Learning</div>
+                </div>
+            </div>
+            <div class="timeline-item fade-in delay-3">
+                <div class="timeline-content">
+                    <div class="timeline-time">12:30 PM - 2:00 PM</div>
+                    <div class="timeline-description">Lunch & Break</div>
+                </div>
+            </div>
+            <div class="timeline-item fade-in">
+                <div class="timeline-content">
+                    <div class="timeline-time">2:00 PM - 6:00 PM</div>
+                    <div class="timeline-description">Projects & Skills Development</div>
+                </div>
+            </div>
+            <div class="timeline-item fade-in delay-1">
+                <div class="timeline-content">
+                    <div class="timeline-time">6:00 PM - 8:00 PM</div>
+                    <div class="timeline-description">Gaming & Recreation</div>
+                </div>
+            </div>
+            <div class="timeline-item fade-in delay-2">
+                <div class="timeline-content">
+                    <div class="timeline-time">8:00 PM - 12:00 AM</div>
+                    <div class="timeline-description">Dinner & Family Time</div>
+                </div>
+            </div>
+            <div class="timeline-item fade-in delay-3">
+                <div class="timeline-content">
+                    <div class="timeline-time">12:00 AM - 4:00 AM</div>
+                    <div class="timeline-description">The Golden Grind Hours</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery -->
+    <section>
+        <h2 class="section-title">📸 Aesthetic Gallery</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item fade-in">🎮</div>
+            <div class="gallery-item fade-in delay-1">🌙</div>
+            <div class="gallery-item fade-in delay-2">💻</div>
+            <div class="gallery-item fade-in delay-3">📚</div>
+            <div class="gallery-item fade-in">🚀</div>
+            <div class="gallery-item fade-in delay-1">⚡</div>
+            <div class="gallery-item fade-in delay-2">🎯</div>
+            <div class="gallery-item fade-in delay-3">✨</div>
+        </div>
+    </section>
+
+    <!-- Mood Board -->
+    <section>
+        <h2 class="section-title">🎭 Mood Board</h2>
+        <div class="mood-items">
+            <div class="mood-item fade-in">
+                <div class="mood-color" style="background: linear-gradient(135deg, #00d4ff, #0099cc);"></div>
+                <p><strong>Neon Cyan</strong></p>
+                <p style="font-size: 0.9rem;">Focus & Energy</p>
+            </div>
+            <div class="mood-item fade-in delay-1">
+                <div class="mood-color" style="background: linear-gradient(135deg, #ff006e, #ff4d7f);"></div>
+                <p><strong>Hot Pink</strong></p>
+                <p style="font-size: 0.9rem;">Passion & Drive</p>
+            </div>
+            <div class="mood-item fade-in delay-2">
+                <div class="mood-color" style="background: linear-gradient(135deg, #00ff88, #00cc66);"></div>
+                <p><strong>Neon Green</strong></p>
+                <p style="font-size: 0.9rem;">Growth & Success</p>
+            </div>
+            <div class="mood-item fade-in delay-3">
+                <div class="mood-color" style="background: linear-gradient(135deg, #0f0f1e, #1a1a2e);"></div>
+                <p><strong>Dark Night</strong></p>
+                <p style="font-size: 0.9rem;">Calm & Mystery</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Character Stats -->
+    <section id="stats">
+        <h2 class="section-title">⚙️ Character Stats</h2>
+        <div class="stats-grid">
+            <div class="stat-card fade-in">
+                <div class="stat-name">
+                    <span>Intelligence</span>
+                    <span>92%</span>
+                </div>
+                <div class="stat-bar">
+                    <div class="stat-fill" style="width: 92%;"></div>
+                </div>
+            </div>
+            <div class="stat-card fade-in delay-1">
+                <div class="stat-name">
+                    <span>Focus</span>
+                    <span>95%</span>
+                </div>
+                <div class="stat-bar">
+                    <div class="stat-fill" style="width: 95%;"></div>
+                </div>
+            </div>
+            <div class="stat-card fade-in delay-2">
+                <div class="stat-name">
+                    <span>Discipline</span>
+                    <span>88%</span>
+                </div>
+                <div class="stat-bar">
+                    <div class="stat-fill" style="width: 88%;"></div>
+                </div>
+            </div>
+            <div class="stat-card fade-in delay-3">
+                <div class="stat-name">
+                    <span>Gaming Skill</span>
+                    <span>90%</span>
+                </div>
+                <div class="stat-bar">
+                    <div class="stat-fill" style="width: 90%;"></div>
+                </div>
+            </div>
+            <div class="stat-card fade-in">
+                <div class="stat-name">
+                    <span>Creativity</span>
+                    <span>87%</span>
+                </div>
+                <div class="stat-bar">
+                    <div class="stat-fill" style="width: 87%;"></div>
+                </div>
+            </div>
+            <div class="stat-card fade-in delay-1">
+                <div class="stat-name">
+                    <span>Grind Level</span>
+                    <span>99%</span>
+                </div>
+                <div class="stat-bar">
+                    <div class="stat-fill" style="width: 99%;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dream Board -->
+    <section>
+        <h2 class="section-title">🌍 Dream Board</h2>
+        <div class="dreams-grid">
+            <div class="dream-card fade-in">
+                <i class="fas fa-map-pin"></i>
+                <h4>Travel the World</h4>
+                <p>Visit tech hubs, gaming conventions, and mysterious locations. Explore every corner of the digital and physical world.</p>
+            </div>
+            <div class="dream-card fade-in delay-1">
+                <i class="fas fa-code"></i>
+                <h4>Build Legendary Apps</h4>
+                <p>Create software that impacts millions. Apps that solve problems and change the way people game and create.</p>
+            </div>
+            <div class="dream-card fade-in delay-2">
+                <i class="fas fa-trophy"></i>
+                <h4>Win Major Tournaments</h4>
+                <p>Become a Free Fire esports legend. Compete at the highest level and claim international championships.</p>
+            </div>
+            <div class="dream-card fade-in delay-3">
+                <i class="fas fa-book-open"></i>
+                <h4>Publish a Novel</h4>
+                <p>Write the mystery thriller that keeps the world guessing. A bestseller that combines my love for stories and suspense.</p>
+            </div>
+            <div class="dream-card fade-in">
+                <i class="fas fa-users"></i>
+                <h4>Mentor the Next Gen</h4>
+                <p>Share knowledge and inspire young gamers and coders. Build a community of focused, ambitious creators.</p>
+            </div>
+            <div class="dream-card fade-in delay-1">
+                <i class="fas fa-star"></i>
+                <h4>Leave a Legacy</h4>
+                <p>Be remembered for innovation, creativity, and the impact made on the gaming and tech industries.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Alter Ego -->
+    <section>
+        <h2 class="section-title">🎭 Alter Ego: Day vs Night</h2>
+        <div class="alter-ego-container">
+            <div class="ego-card fade-in">
+                <div class="ego-title">☀️ DAY MODE</div>
+                <div class="ego-trait">
+                    <i class="fas fa-smile"></i>
+                    <span>Friendly & Social</span>
+                </div>
+                <div class="ego-trait">
+                    <i class="fas fa-dumbbell"></i>
+                    <span>Energetic & Active</span>
+                </div>
+                <div class="ego-trait">
+                    <i class="fas fa-users"></i>
+                    <span>Team Player</span>
+                </div>
+                <div class="ego-trait">
+                    <i class="fas fa-laugh"></i>
+                    <span>Humorous & Light</span>
+                </div>
+                <div class="ego-trait">
+                    <i class="fas fa-handshake"></i>
+                    <span>Approachable</span>
+                </div>
+            </div>
+
+            <div class="ego-card fade-in delay-1">
+                <div class="ego-title">🌙 NIGHT MODE</div>
+                <div class="ego-trait">
+                    <i class="fas fa-brain"></i>
+                    <span>Deep & Thoughtful</span>
+                </div>
+                <div class="ego-trait">
+                    <i class="fas fa-fire"></i>
+                    <span>Intense & Focused</span>
+                </div>
+                <div class="ego-trait">
+                    <i class="fas fa-laptop"></i>
+                    <span>Solo Grinder</span>
+                </div>
+                <div class="ego-trait">
+                    <i class="fas fa-moon"></i>
+                    <span>Mysterious & Wise</span>
+                </div>
+                <div class="ego-trait">
+                    <i class="fas fa-rocket"></i>
+                    <span>Unstoppable Force</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievements -->
+    <section>
+        <h2 class="section-title">🏆 Achievements</h2>
+        <div class="achievements-grid">
+            <div class="achievement fade-in">
+                <i class="fas fa-medal"></i>
+                <h4>Gaming Pro</h4>
+                <p>Ranked Top 100 in Free Fire</p>
+            </div>
+            <div class="achievement fade-in delay-1">
+                <i class="fas fa-code"></i>
+                <h4>Code Master</h4>
+                <p>Built 15+ Projects</p>
+            </div>
+            <div class="achievement fade-in delay-2">
+                <i class="fas fa-book"></i>
+                <h4>Reader Elite</h4>
+                <p>50+ Books Completed</p>
+            </div>
+            <div class="achievement fade-in delay-3">
+                <i class="fas fa-star"></i>
+                <h4>Night Owl</h4>
+                <p>1000+ Hours Grinding</p>
+            </div>
+            <div class="achievement fade-in">
+                <i class="fas fa-brain"></i>
+                <h4>Logic Master</h4>
+                <p>Solved Complex Problems</p>
+            </div>
+            <div class="achievement fade-in delay-1">
+                <i class="fas fa-trophy"></i>
+                <h4>Champion Mindset</h4>
+                <p>Never Give Up Attitude</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Journey -->
+    <section>
+        <h2 class="section-title">📅 My Journey</h2>
+        <div class="journey-timeline">
+            <div class="journey-item fade-in">
+                <div class="journey-year">2006</div>
+                <div>Born into this world with dreams to conquer.</div>
+            </div>
+            <div class="journey-item fade-in delay-1">
+                <div class="journey-year">2014</div>
+                <div>Discovered gaming. First touch with the digital world. Mind blown!</div>
+            </div>
+            <div class="journey-item fade-in delay-2">
+                <div class="journey-year">2016</div>
+                <div>Started coding journey. Built first website. Realized the power of creation.</div>
+            </div>
+            <div class="journey-item fade-in delay-3">
+                <div class="journey-year">2018</div>
+                <div>Competitive gaming era begins. Started grinding tournaments seriously.</div>
+            </div>
+            <div class="journey-item fade-in">
+                <div class="journey-year">2020</div>
+                <div>Pandemic era - Intensive 4 AM study sessions begin. Leveled up massively.</div>
+            </div>
+            <div class="journey-item fade-in delay-1">
+                <div class="journey-year">2023</div>
+                <div>Top 100 Free Fire player. Multiple published projects. The grind pays off.</div>
+            </div>
+            <div class="journey-item fade-in delay-2">
+                <div class="journey-year">2024</div>
+                <div>Building legacy. Creating impact. Mentoring next generation. Sky's not the limit.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section>
+        <h2 class="section-title">🖋️ Thoughts & Insights</h2>
+        <div class="blog-posts">
+            <div class="blog-post fade-in">
+                <div class="blog-date">📅 December 10, 2024</div>
+                <div class="blog-title">The 4AM Philosophy</div>
+                <div class="blog-excerpt">Why the hours between midnight and dawn are the most productive? Discover the science and psychology behind night mode productivity...</div>
+                <div class="read-more">Read More →</div>
+            </div>
+            <div class="blog-post fade-in delay-1">
+                <div class="blog-date">📅 December 8, 2024</div>
+                <div class="blog-title">Gaming as a Life Lesson</div>
+                <div class="blog-excerpt">Every game teaches discipline, strategy, and focus. Here's how competitive gaming shaped my approach to life and work...</div>
+                <div class="read-more">Read More →</div>
+            </div>
+            <div class="blog-post fade-in delay-2">
+                <div class="blog-date">📅 December 5, 2024</div>
+                <div class="blog-title">Code, Craft, Create</div>
+                <div class="blog-excerpt">The journey of building digital dreams. From first line of code to deployed applications - lessons learned and stories from the trenches...</div>
+                <div class="read-more">Read More →</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section>
+        <h2 class="section-title">💬 Testimonials</h2>
+        <div class="testimonials-grid">
+            <div class="testimonial fade-in">
+                <div class="testimonial-text">"Aniket's dedication and focus are unmatched. His ability to grind and achieve goals is inspiring."</div>
+                <div class="testimonial-author">Rahul Kumar</div>
+                <div class="testimonial-role">Gaming Team Lead</div>
+            </div>
+            <div class="testimonial fade-in delay-1">
+                <div class="testimonial-text">"A natural problem solver with exceptional coding skills. His projects always exceed expectations."</div>
+                <div class="testimonial-author">Priya Sharma</div>
+                <div class="testimonial-role">Tech Mentor</div>
+            </div>
+            <div class="testimonial fade-in delay-2">
+                <div class="testimonial-text">"One of the most focused individuals I've met. His night mode grind is absolutely legendary."</div>
+                <div class="testimonial-author">Amit Patel</div>
+                <div class="testimonial-role">College Friend</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2 class="section-title">📬 Get In Touch</h2>
+        <div class="contact-container">
+            <div class="contact-form fade-in">
+                <h3 style="color: var(--neon); margin-bottom: 1.5rem;">Send Me a Message</h3>
+                <form>
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" placeholder="your@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" placeholder="What's on your mind?" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" placeholder="Your message here..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn primary" style="width: 100%; border: none;">Send Message</button>
+                </form>
+            </div>
+
+            <div class="contact-info fade-in delay-1">
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <h4>Email</h4>
+                    <p>anikettudu@email.com</p>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <h4>Phone</h4>
+                    <p>+91 98XXXXXXXX</p>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h4>Location</h4>
+                    <p>India 🇮🇳</p>
+                </div>
+                <h4 style="color: var(--neon); margin-top: 2rem;">Follow Me</h4>
+                <div class="social-links">
+                    <a href="#" title="GitHub" style="background: linear-gradient(135deg, var(--neon-green), var(--neon));"><i class="fab fa-github"></i></a>
+                    <a href="#" title="Instagram" style="background: linear-gradient(135deg, var(--neon-pink), var(--neon));"><i class="fab fa-instagram"></i></a>
+                    <a href="#" title="LinkedIn" style="background: linear-gradient(135deg, var(--neon), var(--neon-green));"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" title="Twitter" style="background: linear-gradient(135deg, var(--neon), var(--neon-pink));"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Signature -->
+    <section class="signature">
+        <div class="monogram">AT</div>
+        <div class="signature-text">ANIKET TUDU</div>
+        <p style="color: var(--neon-pink); font-style: italic;">✨ Crafted with passion at 4 AM ✨</p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-message">
+                "Success is a journey, not a destination. Keep grinding. Keep growing. Keep shining." 🌟
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Aniket Tudu. All Rights Reserved. | Designed & Coded with ❤️ during night hours</p>
+                <p style="margin-top: 0.5rem; font-size: 0.85rem;">🎵 Currently Listening: Lo-Fi Beats 24/7 🎵</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Form submission
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Message sent! Thanks for connecting with me. I\'ll get back to you soon! 🚀');
+            this.reset();
+        });
+
+        // Animated stat bars
+        window.addEventListener('scroll', () => {
+            const statFills = document.querySelectorAll('.stat-fill');
+            statFills.forEach(fill => {
+                const rect = fill.getBoundingClientRect();
+                if (rect.top < window.innerHeight && rect.top > 0) {
+                    fill.style.animation = 'none';
+                    fill.offsetHeight; // trigger reflow
+                    fill.style.animation = 'fillAnimation 2s ease-out forwards';
+                }
+            });
+        });
+
+        // Add CSS animation for stat fill
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fillAnimation {
+                from { width: 0; }
+                to { width: var(--fill-width); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
